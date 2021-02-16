@@ -40,9 +40,8 @@ export const updateLike = async (post, user, state) => {
         post, userId, state
     }
     try {
-        // const res = await axios.post(url + "/like", payload, header);
-        // return res.data;
-         console.log("UpdateLike_ :", url + "/like", payload, header);
+        const res = await axios.post(url + "/like", payload, header);
+        return res.data;
     }catch (e) {
         console.error(e);
     }   
@@ -51,13 +50,9 @@ export const updateLike = async (post, user, state) => {
 export const getLikes = async (content) => {
     const header = await createToken();
     console.log(content)
-    const payload ={
-        content
-    }
     try {
-        // const res = await axios.post(url + "/like", payload, header);
-        // return res.data;
-         console.log("GetLike_ :", url + "/like", payload, header)
+        const res = await axios.get(url + "/like", header);
+        return res.data;
     }catch (e) {
         console.error(e);
     }   

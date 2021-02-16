@@ -12,16 +12,19 @@ const Like = (props) => {
 
   const [state, setState] = React.useState({ liked: false });
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const [content, setcontent] = React.useState();
   // const [refresh, setrefresh] = React.useState(true);
 
 
   React.useEffect(() => {
-    // const fecthLikes = async () => {
-    //     const fetchData = await getLikes();
-    //     dispatch(update(fetchData));
-    // }
+    const fecthLikes = async () => {
+        const fetchData = await getLikes();
+        // dispatch(update(fetchData));
+        console.log(fetchData);
+    }
+
+    fecthLikes();
   })
 
   const like = async () => {
