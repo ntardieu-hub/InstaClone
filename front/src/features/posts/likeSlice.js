@@ -14,6 +14,6 @@ export const likeSlice = createSlice({
 
 export const { update } = likeSlice.actions;
 
-export const selectLike = state => state.like.value;
+export const selectLike = state => state;
 
 export default likeSlice.reducer;

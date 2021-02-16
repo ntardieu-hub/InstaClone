@@ -1,8 +1,8 @@
 import React from "react";
 import {Favorite} from "grommet-icons";
 import { getLikes, updateLike } from "../../services/postsServices";
-import { useDispatch } from "react-redux";
-import { update } from "./likeSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectLike, update } from "./likeSlice";
 import { Button } from "grommet";
 
 const Like = (props) => {
@@ -12,20 +12,37 @@ const Like = (props) => {
 
   const [state, setState] = React.useState({ liked: false });
 
-  const dispatch = useDispatch();
-  // const [content, setcontent] = React.useState();
-  // const [refresh, setrefresh] = React.useState(true);
+  const [refresh, setrefresh] = React.useState(true);
+  const [nbLike, setNbLike] = React.useState();
 
+  const publish = (e) => {
+    e.preventDefault();
+    setrefresh(true);
+  }
+
+  // const likes = useSelector(selectLike);
+  // const dispatch = useDispatch();
 
   React.useEffect(() => {
     const fecthLikes = async () => {
         const fetchData = await getLikes();
-        // dispatch(update(fetchData));
-        console.log(fetchData);
+        const isLiked = fetchData.some(ele => ele.user === userProps.uid && ele.like === postProps.id);
+        if(isLiked){
+          setState({ liked: true })
+        } 
+        likeCount(fetchData);
+        //dispatch(update(fetchData));
     }
-
-    fecthLikes();
+    if(refresh) {
+      fecthLikes();
+      setrefresh(false);
+    }
   })
+
+  const likeCount = async (data) => {
+    const countLike = data.filter(ele => ele.like === postProps.id).length
+    setNbLike(countLike);
+  }
 
   const like = async () => {
     const user = userProps;
@@ -47,23 +64,23 @@ const Like = (props) => {
         <span
           className="p_like p_unlike_icon"
           data-tip="Unlike"
-          onClick={(e)=> {
-           
+          onClick={(e) => {
+            // publish(e)
             unlike()
           }}
         >
-        <Button icon={<Favorite color='brand' />}/>
+        <Button icon={<Favorite color='brand' />} /> {nbLike}
           </span>
       ) : (
         <span
           className="p_like p_like_icon"
           data-tip="Like"
           onClick={(e)=> {
-          
+              // publish(e)
             like()
           }}
         >
-          <Button icon={<Favorite/>}/>
+          <Button icon={<Favorite/>}/> {nbLike}
           </span>
       )}
       </div>

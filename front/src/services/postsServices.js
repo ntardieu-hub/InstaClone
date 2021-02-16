@@ -22,7 +22,7 @@ const createToken = async () => {
 export const addPost = async (content) => {
     const header = await createToken();
     console.log(content)
-    const payload ={
+    const payload = {
         content
     }
     try {
@@ -47,9 +47,8 @@ export const updateLike = async (post, user, state) => {
     }   
 }
 
-export const getLikes = async (content) => {
+export const getLikes = async () => {
     const header = await createToken();
-    console.log(content)
     try {
         const res = await axios.get(url + "/like", header);
         return res.data;

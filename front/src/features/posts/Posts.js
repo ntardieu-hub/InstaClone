@@ -15,12 +15,11 @@ import Like from "./Like.js";
 const Posts = () => {
 
     const user = fire.auth().currentUser;
-    // console.log(user);
     const userEmail = user.email;
 
     const posts = useSelector(selectPosts);
     const dispatch = useDispatch();
-    const [content, setcontent] =React.useState();
+    const [content, setcontent] = React.useState();
     const [refresh, setrefresh] = React.useState(true);
 
    
