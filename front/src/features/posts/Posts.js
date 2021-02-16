@@ -9,6 +9,7 @@ import CardConcave from "../../components/CardConcave";
 import { useSelector, useDispatch } from 'react-redux';
 import { update, selectPosts } from './postsSlice';
 import {addPost, getPosts} from "../../services/postsServices";
+import Like from "./Like.js";
 
 
 const Posts = () => {
@@ -28,7 +29,7 @@ const Posts = () => {
         e.preventDefault();
         
         if (content){
-            addPost(content).then(() =>setrefresh(true));
+            addPost(content).then(() => setrefresh(true));
         }
     }
 
@@ -70,11 +71,11 @@ const Posts = () => {
                     padding="medium"
                     margin="medium"
                     width="medium">
-                        <Text>{post.content} </Text> <p>Publier par : {userEmail}</p>
-                        
+                        <Text>{post.content} </Text> 
+                        <p>Publier par : {userEmail}</p>
+                        <Like dataPost={{post, user}}/>
                     </CardConcave>
                 ))
-
                  : 
                 <Text>Ceci sont les posts</Text>
                 }
