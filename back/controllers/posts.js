@@ -16,7 +16,7 @@ postsRouter.get('/', async (req, res) => {
 postsRouter.post('/', async (req, res)=> {
     const auth = req.currentUser;
     if (auth){
-        const post = new Post(req.body)
+        const post = new Post({content: req.body.content, user: req.body.user})
         const savedPost = post.save()
         const posts = await Post.find({});
         req.io.emit('UPDATE', posts);

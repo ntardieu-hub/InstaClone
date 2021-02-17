@@ -19,11 +19,11 @@ const createToken = async () => {
     return payloadHeader;
 }
 
-export const addPost = async (content) => {
+export const addPost = async (content, user) => {
     const header = await createToken();
     console.log(content)
     const payload = {
-        content
+        content, user
     }
     try {
         const res = await axios.post(url, payload, header);

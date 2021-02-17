@@ -28,7 +28,7 @@ const Posts = () => {
         e.preventDefault();
         
         if (content){
-            addPost(content).then(() => setrefresh(true));
+            addPost(content, userEmail).then(() => setrefresh(true));
         }
     }
 
@@ -71,7 +71,7 @@ const Posts = () => {
                     margin="medium"
                     width="medium">
                         <Text>{post.content} </Text> 
-                        <p>Publier par : {userEmail}</p>
+                        <p>Publier par : {post.user}</p>
                         <Like dataPost={{post, user}}/>
                     </CardConcave>
                 ))
