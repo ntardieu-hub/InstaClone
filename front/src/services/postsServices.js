@@ -32,17 +32,17 @@ export const addPost = async (content) => {
         console.error(e);
     }
 }
-export const updateLike = async (post, user, state) => {
+export const updateLike = async (post, user) => {
     const userId = user?.uid;
     const header = await createToken();
     // console.log(post, user, state);
     const payload = {
-        post, userId, state
+        post, userId
     }
     try {
         const res = await axios.post(url + "/like", payload, header);
         return res.data;
-    }catch (e) {
+    } catch (e) {
         console.error(e);
     }   
 }

@@ -46,7 +46,7 @@ postsRouter.post('/like', async (req, res)=> {
             const savedLike = like.save()
             const likes = await Like.find({});
             req.io.emit('UPDATE', likes);
-            return res.status(201).json(savedLike);
+            return res.status(201); // .json(savedLike)
         // suppression d'un favorie
         } else {
             await Like.findOneAndDelete({ user: req.body.userId, like: req.body.post}).exec();
