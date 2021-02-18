@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+require('dotenv').config()
+
 const decodeIDToken = require('./authenticateToken');
 const postsRouter = require('./controllers/posts');
 
@@ -26,7 +28,7 @@ app.use(function (req, res, next){
 })
 
 mongoose.connect(
-    'mongodb+srv://scott:scott@cluster0.orkij.mongodb.net/<dbname>?retryWrites=true&w=majority',
+    process.env.DB_MONGO_URL,
     {
         useNewUrlParser: true, useUnifiedTopology: true 
     }
